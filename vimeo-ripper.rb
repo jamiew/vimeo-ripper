@@ -3,16 +3,9 @@
 #  | /  | | | | |-' | |   |  | | |-'   )| \  | | | | | |-' |   
 #  `'   ' ' ' ' `-' `-'   `' ' ' `-'   `'  ` ' |-' |-' `-' '   
 #                                              |   |           
-#                                                 
-# downloads the 'original files' for Vimeo videos
-# this isn't currently available via their API
-# 
-# tweak config.yml to your liking and run like `ruby vimeo-ripper.rb`
-# requires mechanize >0.9 gem (nokogiri styles)
-#
+
 # by jamiew for STAR WARS UNCUT archival, 2009-09-08
-# <http://jamiedubs.com> | <http://starwarsuncut.com>
-#
+# <http://jamiedubs.com> :: <http://starwarsuncut.com>
 
 require 'rubygems'
 require 'mechanize'
