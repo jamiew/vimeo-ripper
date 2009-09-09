@@ -38,18 +38,35 @@ unless title =~ /Hello/
 end
 
 # Iterate through our videos, downloading each
-puts "Processing #{config['videos'].length} videos..."
-config['videos'].each do |url|
-  puts "URL: #{url.inspect}"
+videos = YAML.load(File.open(File.dirname(__FILE__)+'/swu.yml'))
+puts "Processing #{videos.length} videos..."
+videos.each do |video|
+  puts video.inspect
+  title, url = video[:title], video[:url]
+  puts "URL: #{url.inspect}  title: #{title}"
   page = agent.get(url)
+  
+  # Skip non-SWU...
+  next unless title =~ /Star Wars Uncut - Scene/
+  
+  number = /Star Wars Uncut - Scene (\d+)/.match(title)[1].strip.chomp
+  puts "Scene number = #{number}"
   
   link = (page/'.file_extension a') # instead of .file_details, so we can grab 'MOV' text
   next if link.nil? || link.empty?
   
   href = link[0]['href']
-  filename = "#{url.split('/')[-1]}.#{link[0].content.downcase}"
+  filename = "#{number}.#{link[0].content.downcase}"
   puts "Saving #{href} => #{filename} ..."
-  agent.get(href).save_as("#{output_dir}/#{filename}")
+  if File.exists?("#{output_dir}/#{filename}")
+    puts "File exists, skipping..."
+  else
+    begin
+      agent.get(href).save_as("#{output_dir}/#{filename}")
+    rescue
+      puts "Error: #{$!}"
+    end
+  end
   
 end
 
