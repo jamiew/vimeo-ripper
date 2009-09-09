@@ -20,7 +20,7 @@ FileUtils.mkdir(output_dir) rescue (puts "mkdir: #{$!}")
 
 # Browser
 agent = WWW::Mechanize.new
-agent.user_agent_alias = "Mac Safari" #TEEHEE
+agent.user_agent = "Vimeo Ripper [#{config['username']}]"
 
 # Authenticate
 puts "Logging in..."
