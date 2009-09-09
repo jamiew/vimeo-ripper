@@ -5,15 +5,24 @@
 
 
 Downloads the 'original files' for Vimeo videos
-(This isn't currently available via their API)
+This isn't currently available via their API
 
-Requires the mechanize >0.9 gem (w/ Nokogiri)
+Requires the mechanize >0.9 gem (using Nokogiri)
 
-* tweak config.yml to your liking
+
+== USAGE ==
+
+* copy config.sample.yml to config.yml & edit
 * run like `ruby vimeo-ripper.rb`
 * enjoy downloaded files in the output/ directory
 
 
+== ABOUT ==
+
 Written by Jamie Wilkinson for STAR WARS UNCUT archival
+http://jamiedubs.com :: http://starwarsuncut.com
 Speed Project approved: 1h -- 2009-09-08
-<http://jamiedubs.com> :: <http://starwarsuncut.com>
+
+     FF00FF00FF00FF00FF00FF00
+     0O0O>> F.A.T. Lab <<O0O0
+     F@F@F@F@F@F@F@F@F@F@F@F@
