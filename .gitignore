@@ -1,2 +1,4 @@
-config.yml
 .DS_store
+config.yml
+videos.yml
+output

@@ -22,7 +22,7 @@ rows.each { |row|
 STDERR.puts "Found #{output.length} fields"
 
 # Save
-filename = "swu.yml"
+filename = "videos.yml"
 File.open(filename, 'w') { |out| YAML.dump(output, out) }
 
 exit 0
