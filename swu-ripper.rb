@@ -17,8 +17,8 @@ require 'mechanize'
 config = YAML.load(File.open(File.dirname(__FILE__)+'/config.yml'))
 raise "No config file" if config.nil? || config.empty?
 
-output_dir = "#{File.dirname(__FILE__)}/output"
-FileUtils.mkdir(output_dir) rescue (puts "mkdir: #{$!}")
+output_dir = "#{File.dirname(__FILE__)}/originals"
+FileUtils.mkdir_p(output_dir) rescue (puts "mkdir: #{$!}")
 
 # Browser
 agent = WWW::Mechanize.new
@@ -55,22 +55,20 @@ videos.each do |video|
 
   # Compute filename (with no extension, we find that on the Vimeo page)
   filename = "#{sprintf('%03d',scene_id)}_#{vimeo_id}"
-  puts "Scene #{scene_id}, vimeo_id #{vimeo_id} (#{filename}) ..."
+  STDOUT.print "Scene ##{scene_id}, vimeo_id #{vimeo_id} ... "
+  STDOUT.flush
   
   # Skip it if it exists already
   # TODO FIXME This is super slow..how to do File.exists? w/ a regex?! fnmatch+dir.read?. 
   # would rather do this than un-necessary HTTP fetches though...
-  ['mov','avi','flv','mp4'].each do |ext|
-    if File.exists?("#{output_dir}/#{filename}.#{ext}")
-    # if File.fnmatch("#{filename}*", "#{output_dir}/#{filename}") #glob to match any extension? FIXME
-      puts "File exists! Skipping..."
-      break
-      next
-    end
+  if File.exists?("#{output_dir}/#{filename}.mp4") || File.exists?("#{output_dir}/#{filename}.mov") || File.exists?("#{output_dir}/#{filename}.avi") || File.exists?("#{output_dir}/#{filename}.wmv") || File.exists?("#{output_dir}/#{filename}.flv") || File.exists?("#{output_dir}/#{filename}.m4v")
+    puts "file exists! Skipping"
+    next
   end
+
   
   # OK, proceed. Fetch Vimeo page, Get the link for the file
-  puts "Getting: #{url}"
+  puts "downloading: #{url}"
   page = agent.get(url)
   link = (page/'.file_extension a') # instead of .file_details, so we can grab 'MOV' text
   next if link.nil? || link.empty?

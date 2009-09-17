@@ -1,4 +1,6 @@
 .DS_store
 config.yml
 videos.yml
-output
+originals
+intermediate
+render
