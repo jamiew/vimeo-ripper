@@ -6,6 +6,7 @@
 #  `'   ' ' ' ' `-' `-'   `' ' ' `-'   `'  ` ' |-' |-' `-' '   
 #                                              |   |           
 
+# downloads original files from Vimeo videos
 # see README for usage & dependencies
 # written by jamiew for STAR WARS UNCUT archival, 2009-09-08
 # <http://jamiedubs.com> :: <http://starwarsuncut.com>
@@ -61,7 +62,7 @@ videos.each do |video|
   # Skip it if it exists already
   # TODO FIXME This is super slow..how to do File.exists? w/ a regex?! fnmatch+dir.read?. 
   # would rather do this than un-necessary HTTP fetches though...
-  if File.exists?("#{output_dir}/#{filename}.mp4") || File.exists?("#{output_dir}/#{filename}.mov") || File.exists?("#{output_dir}/#{filename}.avi") || File.exists?("#{output_dir}/#{filename}.wmv") || File.exists?("#{output_dir}/#{filename}.flv") || File.exists?("#{output_dir}/#{filename}.m4v")
+  if File.exists?("#{output_dir}/#{filename}.mp4") || File.exists?("#{output_dir}/#{filename}.mov") || File.exists?("#{output_dir}/#{filename}.avi") || File.exists?("#{output_dir}/#{filename}.wmv") || File.exists?("#{output_dir}/#{filename}.flv") || File.exists?("#{output_dir}/#{filename}.m4v") || File.exists?("#{output_dir}/#{filename}.dv") || File.exists?("#{output_dir}/#{filename}.unk") || File.exists?("#{output_dir}/#{filename}.mpg")
     puts "file exists! Skipping"
     next
   end

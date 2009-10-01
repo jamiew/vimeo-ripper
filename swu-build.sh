@@ -1,7 +1,9 @@
 #!/bin/sh
 #
 # Continuous Build for Star Wars Uncut
+# Runs all other pieces of the build
 # in effect... this script remakes Star Wars!!11
+#
 # Jamie Wilkinson <http://jamiedubs.com> @jamiew github:jamiew
 #
 
