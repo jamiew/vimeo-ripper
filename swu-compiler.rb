@@ -1,4 +1,9 @@
 #!/usr/bin/env ruby
+#
+# Downloads an export of all the current videos from SWU-HQ
+# then dumps it into a video.yml file
+#
+
 require 'rubygems'
 require 'mechanize'
 
@@ -17,7 +22,7 @@ puts text.inspect
 rows = text.split("\n")
 rows.each { |row|
   fields = row.split(',')
-  output << { :vimeo_id => fields[0], :scene_id => fields[1] }
+  output << { :vimeo_id => fields[0], :scene_id => fields[1], :user_id => fields[2], :user_name => fields[3] }
 }
 STDERR.puts "Found #{output.length} fields"
 
