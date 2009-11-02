@@ -35,3 +35,7 @@ exit 0
 # MP4:
 # $FFMPEG -i "$i" -f mp4 -vcodec libxvid -maxrate 1000 -qmin 3 -qmax 5 -bufsize 4096 -g 300 -acodec aac -s 640x480 -ab 128k -b 500k "$OUTPUT"
 #
+# Ogg Theora (using ffmpeg2theora, separate package):
+# ffmpeg2theora "$i" --width 640 --height 480 --aspect 4:3 -F 30000:1001 -sync --keyint 1 -c 2 -H 44100 -o "$OUTPUT"
+#
+

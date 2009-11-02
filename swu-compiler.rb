@@ -18,7 +18,7 @@ page = agent.get(url)
 # Process
 output = []
 text = page.body
-puts text.inspect
+# puts text.inspect
 rows = text.split("\n")
 rows.each { |row|
   fields = row.split(',')
