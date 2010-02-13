@@ -56,25 +56,29 @@ videos.each do |video|
 
   # Compute filename (with no extension, we find that on the Vimeo page)
   filename = "#{sprintf('%03d',scene_id)}_#{vimeo_id}"
-  STDOUT.print "Scene ##{scene_id}, vimeo_id #{vimeo_id} ... "
-  STDOUT.flush
+  #STDOUT.print "Scene ##{scene_id}, vimeo_id #{vimeo_id} ... "
+  intro = "Scene ##{scene_id}, vimeo_id #{vimeo_id} ... "
+  #STDOUT.flush
   
   # Skip it if it exists already
   # TODO FIXME This is super slow..how to do File.exists? w/ a regex?! fnmatch+dir.read?. 
   # would rather do this than un-necessary HTTP fetches though...
   if File.exists?("#{output_dir}/#{filename}.mp4") || File.exists?("#{output_dir}/#{filename}.mov") || File.exists?("#{output_dir}/#{filename}.avi") || File.exists?("#{output_dir}/#{filename}.wmv") || File.exists?("#{output_dir}/#{filename}.flv") || File.exists?("#{output_dir}/#{filename}.m4v") || File.exists?("#{output_dir}/#{filename}.dv") || File.exists?("#{output_dir}/#{filename}.unk") || File.exists?("#{output_dir}/#{filename}.mpg")
-    puts "file exists! Skipping"
+    # puts "file exists! Skipping"
     next
   end
 
   
   # OK, proceed. Fetch Vimeo page, Get the link for the file
-  puts "downloading: #{url}"
+  puts intro+"downloading: #{url}"
   page = agent.get(url)
-  link = (page/'.file_extension a') # instead of .file_details, so we can grab 'MOV' text
-  next if link.nil? || link.empty?
+  link = (page/'.download a') # instead of .file_details, so we can grab 'MOV' text
+  if link.nil? || link.empty?
+    puts "Error, no download link!"
+    next
+  end
   href = link[0]['href']
-  extension = link[0].content.downcase
+  extension = (page/'.file_extension')[0].content.downcase.strip
   
   # Download the file. May timeout etc.
   begin
