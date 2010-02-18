@@ -23,11 +23,11 @@ $RUBY swu-ripper.rb
 # rm -f output/00_daily_dump.tgz
 # tar czvf output/00_daily_dump.tgz output/*
 
-# transcode to intermediate format
-/bin/sh swu-transcode.sh
+# transcode to intermediate format - temporarily disabled
+###/bin/sh swu-transcode.sh
 
-# generate a stitched video
-/bin/sh swu-merge.sh
+# generate a stitched video - temporarily disabled
+###/bin/sh swu-merge.sh
 
 echo "SWU build complete! May the Force be with you."
 exit
