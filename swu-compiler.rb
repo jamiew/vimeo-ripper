@@ -7,7 +7,7 @@
 require 'rubygems'
 require 'mechanize'
 
-agent = WWW::Mechanize.new
+agent = Mechanize.new
 agent.user_agent = "Star Wars Uncut Assemblotron <http://jamiedubs.com>"
 
 # Fetch Casey's dump

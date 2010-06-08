@@ -22,7 +22,7 @@ output_dir = "#{File.dirname(__FILE__)}/originals"
 FileUtils.mkdir_p(output_dir) rescue (puts "mkdir: #{$!}")
 
 # Browser
-agent = WWW::Mechanize.new
+agent = Mechanize.new
 agent.user_agent = "Star Wars Uncut Assemblotron <http://jamiedubs.com>"
 
 # Authenticate
